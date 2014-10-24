@@ -21,7 +21,7 @@ Customizable Scroll to hash jQuery plugin
 All of the options below are available to customize scrollToHash.
 
 | Variable | Default | Type | Description |
-| :- | :- | :- | :- |
+| :----- | :----- | :----- | :----- |
 | scrollSpeed | 1000 | int | Speed in ms of the scroll |
 | offsetTop | 0 | int | Distance in px where to stop scroll above the target |
 | offsetBottom | 0 | int | Distance in px where to stop scroll underneath the target |
