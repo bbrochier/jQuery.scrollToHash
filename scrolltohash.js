@@ -10,9 +10,10 @@
     // Default options
     var pluginName = "scrollToHash",
         defaults = {
-            scrollSpeed   : 1000,
-            target        : null,
-            scrollOffset  : 0,
+            scrollDuration  : 1000,
+            target          : null,
+            scrollOffset    : 0,
+            easing          : "swing"
         };
 
 
@@ -31,8 +32,9 @@
     Plugin.prototype = {
 
         init: function() {
-            var iScrollSpeed = this.options.scrollSpeed,
-                iScrollOffset = this.options.scrollOffset;
+            var iScrollDuration = this.options.scrollDuration,
+                iScrollOffset = this.options.scrollOffset,
+                sEasing = this.options.easing;
 
             $(this.element).on("click", function(e) {
               e.preventDefault();
@@ -40,16 +42,16 @@
                 var target = $(this.hash);
                 target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
                 if (target.length) {
-                  Plugin.prototype.scrollToTarget(target, iScrollSpeed, iScrollOffset);
+                  Plugin.prototype.scrollToTarget(target, iScrollDuration, iScrollOffset, sEasing);
                 }
               }
             });
         },
 
-        scrollToTarget: function(target, scrollSpeed, scrollOffset) {
+        scrollToTarget: function(target, scrollDuration, scrollOffset, easing) {
             $('html,body').animate({
               scrollTop: target.offset().top + scrollOffset
-            }, scrollSpeed);
+            }, scrollDuration, easing);
             return false;
         }
 
@@ -72,7 +74,7 @@
 
     //   // Default options
     //   var settings = $.extend({
-    //       scrollSpeed    : 1000,
+    //       scrollDuration    : 1000,
     //       element        : null
     //   }, options);
 
@@ -83,7 +85,7 @@
     //       if (target.length) {
     //         $('html,body').animate({
     //           scrollTop: target.offset().top
-    //         }, settings.scrollSpeed);
+    //         }, settings.scrollDuration);
     //         return false;
     //       }
     //     }
