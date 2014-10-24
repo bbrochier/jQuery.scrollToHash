@@ -1,23 +1,15 @@
 jQuery.scrollToHash
 ===================
 
+Work in progress !!!!!
 Customizable Scroll to hash jQuery plugin
-
-##Todo
-
-###Options
-
-- [ ] offset management
-- [x] scroll speed
-- [ ] callback
-- [ ] target si pas de #
 
 ##Usage
 ```
 	$('a').scrollToHash();
 ```
 
-##1.Options
+##1. Options
 All of the options below are available to customize scrollToHash.
 
 | Variable | Default | Type | Description |
@@ -26,7 +18,7 @@ All of the options below are available to customize scrollToHash.
 | offsetTop | 0 | int | Distance in px where to stop scroll above the target |
 | offsetBottom | 0 | int | Distance in px where to stop scroll underneath the target |
 
-##2.Default
+##2. Default
 
 ```
 	$('').scrollToHash({
@@ -35,3 +27,14 @@ All of the options below are available to customize scrollToHash.
         offsetBottom 	: 0
     });
 ```
+
+##Todos
+
+- [ ] offset management
+- [x] scroll speed
+- [ ] callback
+- [ ] target si pas de #
+
+
+##Sources
+Scroll to hash smoothly : [http://css-tricks.com/snippets/jquery/smooth-scrolling/](http://css-tricks.com/snippets/jquery/smooth-scrolling/)
