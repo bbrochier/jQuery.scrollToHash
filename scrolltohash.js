@@ -34,32 +34,43 @@
     Plugin.prototype = {
 
         init: function() {
-            var s = this,
-                iScrollDuration = s.options.scrollDuration,
-                iScrollOffset = s.options.scrollOffset,
-                sEasing = s.options.easing;
+            Plugin.prototype.bindUIActions(this.element, this.options);
+        },
 
-            $(this.element).on("click", function(e) {
-              e.preventDefault();
-
-              //beforeScroll Callback
-              if(s.options.beforeScroll !== false){
-                s.options.beforeScroll();
-              }
-              if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-                if (target.length) {
-                  Plugin.prototype.scrollToTarget(target, iScrollDuration, iScrollOffset, sEasing, s.options.afterScroll);
+        bindUIActions: function(element, options) {
+            $(element).on("click", function(e) {
+                e.preventDefault();
+                
+                //Callback "beforeScroll"
+                if(options.beforeScroll !== false){
+                    options.beforeScroll();
                 }
-              }
-
+                
+                Plugin.prototype.getTarget(element, options);
             });
+        },
+
+        getTarget: function(element, options){
+            var target;
+            if($(element).attr('href') !== undefined) {
+                target = $(element).attr('href');
+            }
+            if($(element).data('target') !== undefined){
+                target = $(element).data('target');
+            }
+            Plugin.prototype.checkTarget(target, element, options);
+        },
+
+        checkTarget: function(target, element, options){
+            //Do some logic here to be sure to have a good target
+            if (target.length) {
+              Plugin.prototype.scrollToTarget(target, options.scrollDuration, options.scrollOffset, options.easing, options.afterScroll);
+            }
         },
 
         scrollToTarget: function(target, scrollDuration, scrollOffset, easing, callback) {
             $('html,body').animate({
-              scrollTop: target.offset().top + scrollOffset
+              scrollTop: $(target).offset().top + scrollOffset
             }, scrollDuration, easing, function() {
                 if (typeof callback == 'function') {
                     callback();
@@ -67,7 +78,7 @@
                 callback = null;
             });
             return false;
-        },
+        }
 
     };
 
