@@ -4,6 +4,16 @@ jQuery.scrollToHash
 Work in progress !!!!!
 Customizable Scroll to hash jQuery plugin
 
+#Todos
+
+- [x] offset management
+- [x] scroll duration
+- [x] easing
+- [x] callback
+- [ ] target si pas de #
+- [ ] url rewrite true/false
+
+
 #How to use
 
 ##1. Load jQuery and scrollToHash
@@ -47,27 +57,37 @@ All of the options below are available to customize scrollToHash.
 
 | Variable | Default | Type | Description | Exemple |
 | :----- | :----- | :----- | :----- | :----- |
-| easing | "swing" | string | scroll effect (see "3. Easing")| 
+| easing | "swing" | string | Scroll effect (see "4. Easing")| 
 | scrollDuration | 1000 | int | Duration (in ms) of the scroll |
 | scrollOffset | 0 | int | Distance (in px) where to stop scroll before or after the target | -15 
 | target | null | string | # to target if the trigger has no "href" nor "data-target" | "#my-id"
 | urlRewrite | true | boolean | Rewrite of URL with #target |
 
+##2. Callbacks
+| Variable | Default | Type | Description | Exemple |
+| :----- | :----- | :----- | :----- | :----- |
+| beforeScroll | false | function | Executed before the scroll starts | 
+| afterScroll | false | function | Executed after the scroll reachs target | function() { console.log("done"); }
 
-##2. Defaults
+
+##3. Defaults
 
 ```
 	$('.trigger').scrollToHash({
         scrollDuration	: 1000,
         scrollOffset 	: 0,
         urlRewrite	    : true,
-        target			: null,
-        easing			: "swing"
+        target			: false,
+        easing			: "swing",
+        
+        //Callbacks
+        beforeScroll    : false,
+        afterScroll     : false
     });
 ```
 
 
-##3. Easing (optional)
+##4. Easing (optional)
 Add effects to the scroll using the external [jquery easing plugin](http://gsgd.co.uk/sandbox/jquery/easing/)
 
 ### Load Easing
@@ -89,16 +109,6 @@ You can preview easing effects using the [easing cheatsheet](http://easings.net/
         easing	: "easeOutQuint"
     });
 ```
-
-
-#Todos
-
-- [x] offset management
-- [x] scroll duration
-- [ ] callback
-- [x] easing
-- [ ] target si pas de #
-- [ ] url rewrite true/false
 
 
 #Sources

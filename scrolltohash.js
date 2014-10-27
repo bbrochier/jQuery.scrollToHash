@@ -13,7 +13,9 @@
             scrollDuration  : 1000,
             target          : null,
             scrollOffset    : 0,
-            easing          : "swing"
+            easing          : "swing",
+            beforeScroll    : false,
+            afterScroll     : false
         };
 
 
@@ -32,30 +34,43 @@
     Plugin.prototype = {
 
         init: function() {
-            var iScrollDuration = this.options.scrollDuration,
-                iScrollOffset = this.options.scrollOffset,
-                sEasing = this.options.easing;
+            var s = this,
+                iScrollDuration = s.options.scrollDuration,
+                iScrollOffset = s.options.scrollOffset,
+                sEasing = s.options.easing;
 
             $(this.element).on("click", function(e) {
               e.preventDefault();
+
+              //beforeScroll Callback
+              if(s.options.beforeScroll !== false){
+                s.options.beforeScroll();
+              }
               if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
                 var target = $(this.hash);
                 target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
                 if (target.length) {
-                  Plugin.prototype.scrollToTarget(target, iScrollDuration, iScrollOffset, sEasing);
+                  Plugin.prototype.scrollToTarget(target, iScrollDuration, iScrollOffset, sEasing, s.options.afterScroll);
                 }
               }
+
             });
         },
 
-        scrollToTarget: function(target, scrollDuration, scrollOffset, easing) {
+        scrollToTarget: function(target, scrollDuration, scrollOffset, easing, callback) {
             $('html,body').animate({
               scrollTop: target.offset().top + scrollOffset
-            }, scrollDuration, easing);
+            }, scrollDuration, easing, function() {
+                if (typeof callback == 'function') {
+                    callback();
+                }
+                callback = null;
+            });
             return false;
-        }
+        },
 
     };
+
 
     // A really lightweight plugin wrapper around the constructor,
     // preventing against multiple instantiations
