@@ -10,8 +10,10 @@ Customizable Scroll to hash jQuery plugin
 - [x] scroll duration
 - [x] easing
 - [x] callback
-- [ ] target si pas de #
+- [ ] target checking
 - [ ] url rewrite true/false
+- [ ] speed management
+- [ ] page change widh # in URL
 
 
 #How to use
@@ -38,7 +40,7 @@ To use scrollToHash, you’ll need to make sure both the scrollToHash and jQuery
 ```
 	<button data-target="#targetId" class="trigger">Go to targetId</a>
 ```
-***Note:** The target can also be set in the plugin's options.*
+_**Note:** The target can also be set in the plugin's options._
 
 ###Javascript
 ```
